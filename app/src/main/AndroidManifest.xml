@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+          package="com.example.trip_planner_home_page"
+          tools:replace="android:appComponentFactory"
+          android:appComponentFactory="whateverString">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+
+    <application
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme"
+
+    >
+        <activity android:name=".DestinationCity">
+        </activity>
+        <activity android:name=".BookingSuccessful">
+        </activity>
+        <activity android:name=".PaymentOptions">
+        </activity>
+        <activity android:name=".PackageSummary">
+        </activity>
+        <activity android:name=".UserPackageInformation">
+        </activity>
+        <activity android:name=".PackageDetail">
+        </activity>
+        <activity android:name=".CityDetailPage">
+        </activity>
+        <activity android:name=".RegisterActivity">
+        </activity>
+        <activity android:name=".Forgot_Password">
+        </activity>
+        <activity android:name=".LoginActivity">
+        </activity>
+        <activity android:name=".Contact_Us"
+        android:parentActivityName=".MainActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value=".MainActivity"/>
+        </activity>
+        <activity android:name=".Your_Profile">
+
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value=".MainActivity"/>
+
+        </activity>
+        <activity android:name=".terms_and_conditions"
+                  android:parentActivityName=".MainActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value=".MainActivity"/>
+
+        </activity>
+        <activity android:name=".rateus_display_message">
+        </activity>
+        <activity android:name=".RateUs"
+                  android:parentActivityName=".MainActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value=".MainActivity"/>
+        </activity>
+        <activity
+                android:name=".SplashScreen"
+                android:label="@string/app_name"
+                android:noHistory="true"
+                android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+                android:name=".MainActivity"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+    </application>
+
+</manifest>

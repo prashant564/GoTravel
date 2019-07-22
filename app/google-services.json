@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "499753293427",
+    "firebase_url": "https://triplannerv2.firebaseio.com",
+    "project_id": "triplannerv2",
+    "storage_bucket": "triplannerv2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:499753293427:android:ca88753ff16256e2",
+        "android_client_info": {
+          "package_name": "com.example.TripPlannerversionTwo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "499753293427-kouscnd5v9epkd94d2o5gbvoea8u0r4j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.TripPlannerversionTwo",
+            "certificate_hash": "7d5462e0a0e25a9cbd5ab895106563ca2a48f3b3"
+          }
+        },
+        {
+          "client_id": "499753293427-7mfv7ckcprgk9sb2gm6mbj8bke82g014.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyIJ1jThbEw89FJmOEjAJ-QViciyePB2w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "499753293427-7mfv7ckcprgk9sb2gm6mbj8bke82g014.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
