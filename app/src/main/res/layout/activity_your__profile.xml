@@ -6,94 +6,57 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
-    <ImageButton
-            android:layout_width="66dp"
-            android:layout_height="57dp" app:srcCompat="@drawable/back_button"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp" android:layout_marginStart="8dp" android:id="@+id/imageButton_back"
-            android:scaleType="fitXY"/>
-    <ImageButton
-            android:layout_width="66dp"
-            android:layout_height="57dp" app:srcCompat="@drawable/home_button"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="8dp" android:id="@+id/imageButton_home" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:scaleType="fitXY"/>
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="0dp"
             android:layout_height="150dp" app:srcCompat="@drawable/login_logo"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp" app:layout_constraintEnd_toEndOf="parent"
+            app:civ_border_color="@android:color/black"
+            app:civ_border_width="2dp"
+            app:layout_constraintStart_toStartOf="@+id/textView_profile"
+            app:layout_constraintEnd_toEndOf="@+id/textView_profile"
             android:id="@+id/imageView_profile_pic"
-            app:layout_constraintHorizontal_bias="0.493" app:layout_constraintTop_toBottomOf="@+id/imageButton_back"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="Name"
-            android:ems="10"
-            app:layout_constraintStart_toStartOf="@+id/imageView_profile_pic"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/editText_name" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/imageView_profile_pic" app:layout_constraintVertical_bias="0.002"
-            android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="Email Id"
-            android:ems="10"
-            app:layout_constraintStart_toStartOf="@+id/editText_name"
-            android:id="@+id/editText_email_id"
-            app:layout_constraintTop_toBottomOf="@+id/editText_name" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"
-            android:layout_marginTop="8dp"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="Password"
-            android:ems="10"
-            app:layout_constraintStart_toStartOf="@+id/editText_email_id"
-            android:id="@+id/editText_password" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/editText_email_id" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="City"
-            android:ems="10"
-            android:id="@+id/editText_city" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/editText_password" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/editText_password" app:layout_constraintHorizontal_bias="0.0"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="Country"
-            android:ems="10"
-            app:layout_constraintStart_toStartOf="@+id/editText_city"
-            android:id="@+id/editText_country" android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/editText_city" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"/>
+            app:layout_constraintHorizontal_bias="0.493" tools:layout_editor_absoluteY="73dp"
+            tools:ignore="MissingConstraints"/>
     <Button
             android:text="save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/editText_country"
-            android:id="@+id/button_save" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/editText_country" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginStart="64dp"
-            app:layout_constraintVertical_bias="0.514"/>
+            android:id="@+id/button_save_yourdispalay"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView_city" app:layout_constraintEnd_toEndOf="@+id/textView_city"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/textView_city"
+            app:layout_constraintVertical_bias="0.147"/>
     <TextView
             android:text="PROFILE"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:id="@+id/textView_profile"
-            app:layout_constraintStart_toEndOf="@+id/imageButton_back" android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton_home" android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/imageView_profile_pic"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent" android:textStyle="bold"
-            android:textAlignment="center" android:textSize="26sp"/>
+            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
+            android:textAlignment="center" android:textSize="26sp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent" android:textStyle="bold"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            app:layout_constraintStart_toStartOf="@+id/imageView_profile_pic"
+            app:layout_constraintEnd_toEndOf="@+id/imageView_profile_pic"
+            android:id="@+id/textView_username" android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
+            android:layout_marginTop="36dp" app:layout_constraintTop_toBottomOf="@+id/imageView_profile_pic"
+            app:layout_constraintHorizontal_bias="0.0"/>
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            app:layout_constraintStart_toStartOf="@+id/textView_username"
+            app:layout_constraintEnd_toEndOf="@+id/textView_username"
+            android:id="@+id/textView_login_email" app:layout_constraintTop_toBottomOf="@+id/textView_username"
+            android:layout_marginTop="16dp"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            app:layout_constraintStart_toStartOf="@+id/textView_login_email" app:layout_constraintEnd_toEndOf="@+id/textView_login_email"
+            android:id="@+id/textView_city"
+            app:layout_constraintTop_toBottomOf="@+id/textView_login_email" android:layout_marginTop="16dp"
+    />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,6 +19,8 @@ import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+
+
     var values = arrayOf("DELHI","MUMBAI","MANALI")
 
 
@@ -26,6 +28,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
 
 //        supportActionBar?.title = "Select current city"
 
@@ -99,7 +103,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_your_profile -> {
-                startActivity(Intent(this@MainActivity, Your_Profile::class.java))
+
+                    startActivity(Intent(this@MainActivity, Your_Profile::class.java))
+
             }
 
             R.id.nav_contact_us -> {
