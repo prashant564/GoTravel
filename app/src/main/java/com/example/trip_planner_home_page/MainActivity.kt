@@ -2,60 +2,41 @@ package com.example.trip_planner_home_page
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.core.view.GravityCompat
 
 import android.view.MenuItem
 
 import android.view.Menu
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.trip_planner_home_page.models.Cities
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Item
+import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.current_city_row.view.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
-
-
-    var values = arrayOf("DELHI","MUMBAI","MANALI")
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        supportActionBar?.title = "Select current city"
 
 
-//        supportActionBar?.title = "Select current city"
 
-        //Listview started
+      fetchCities()
 
-         val adapter = ArrayAdapter(this,
-            R.layout.listview_item, values)
-
-
-         val listView: ListView = findViewById(R.id.listView_current_city)
-
-        listView.setAdapter(adapter)
-        listView.setOnItemClickListener { parent, view, position, id ->
-
-            val intent = Intent(this@MainActivity, DestinationCity::class.java)
-
-            //getItemAtPosition
-            var city_current:String = listView_current_city.getItemAtPosition(position).toString()
-            intent.putExtra("city_current",city_current)
-
-            startActivity(intent)
-
-        }
-
-
-        //listView Ended
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -72,6 +53,45 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navView.setNavigationItemSelectedListener(this)
 
 
+    }
+
+    companion object{
+        val USER_KEY = "USER_KEY"
+    }
+
+    private fun fetchCities(){
+
+        val ref = FirebaseDatabase.getInstance().getReference("/cityInformation")
+        ref.addListenerForSingleValueEvent(object: ValueEventListener{
+
+            override fun onDataChange(p0: DataSnapshot) {
+                val adapter = GroupAdapter<ViewHolder>()
+                p0.children.forEach {
+                    Log.d("MainActivity", it.toString())
+                    val cities = it.getValue(Cities::class.java)
+                    if(cities!=null){
+                        adapter.add(CitiesItem(cities))
+                    }
+
+                }
+
+                adapter.setOnItemClickListener {item, view ->
+
+                    val citiesItem = item as CitiesItem
+                    val intent = Intent(view.context,DestinationCity::class.java)
+                    intent.putExtra("USER_KEY",citiesItem.cities)
+
+                    startActivity(intent)
+
+                    finish()
+                }
+                current_city_recyclerView.adapter = adapter
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+        })
     }
 
     override fun onBackPressed() {
@@ -133,4 +153,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
+
+    class CitiesItem(val cities: Cities) : Item<ViewHolder>(){
+
+        override fun bind(viewHolder: ViewHolder, position: Int) {
+
+
+
+            viewHolder.itemView.textView_current_city.text = cities.city_name
+//
+//        viewHolder.itemView.textView_current_city.text = cities.city_name
+//        Log.d("MainActivity",cities.city_name)
+        }
+
+        override fun getLayout(): Int {
+            return R.layout.current_city_row
+        }
+    }
 }
+

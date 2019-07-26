@@ -44,7 +44,7 @@ class DestinationCity : AppCompatActivity() {
 
         listView_destination_city.setAdapter(adapter)
         listView_destination_city.setOnItemClickListener {parent, view, position, id ->
-            startActivity(Intent(this@DestinationCity,CityDetailPage::class.java))
+            startActivity(Intent(this@DestinationCity,CityOnlyEntry::class.java))
         }
 
             }
