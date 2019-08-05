@@ -82,8 +82,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     intent.putExtra("USER_KEY",citiesItem.cities)
 
                     startActivity(intent)
-
-                    finish()
                 }
                 current_city_recyclerView.adapter = adapter
             }

@@ -220,6 +220,8 @@ class CityEntry : AppCompatActivity() {
                     }
 
 //                    saveUserToFirebaseDatabase(city_image_url.toString(),image1_url.toString(),image2_url.toString(),image3_url.toString(),image4_url.toString())
+//                    val ref = FirebaseDatabase.getInstance().getReference("").push()
+
                 }
 
 

@@ -6,22 +6,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".DestinationCity">
-
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_height="0dp" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView_destination_city"
-            app:layout_constraintVertical_bias="0.609" android:id="@+id/listView_destination_city"
-            android:background="@android:color/background_light" android:padding="40dp"/>
-    <TextView
-            android:text="CHOOSE YOUR DESTINATION CITY"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView_destination_city" android:textSize="24sp" android:textStyle="bold"
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="32dp"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.0"/>
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/recyclerView_destination_city"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

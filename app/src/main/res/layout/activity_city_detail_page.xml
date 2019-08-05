@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
@@ -12,41 +11,17 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:context=".MainActivity">
-            <ImageButton
-                    android:layout_width="66dp"
-                    android:layout_height="57dp" app:srcCompat="@drawable/back_button"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="8dp" android:id="@+id/imageButton"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="8dp" android:scaleType="fitXY"/>
-            <ImageButton
-                    android:layout_width="66dp"
-                    android:layout_height="57dp" app:srcCompat="@drawable/home_button"
-                    app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="8dp"
-                    app:layout_constraintEnd_toEndOf="parent" android:id="@+id/imageButton2"
-                    android:layout_marginEnd="8dp"
-                    android:scaleType="fitXY"/>
             <ImageView
-                    android:layout_width="247dp"
-                    android:layout_height="151dp" app:srcCompat="@mipmap/ic_launcher"
+                    android:layout_width="408dp"
+                    android:layout_height="178dp" app:srcCompat="@mipmap/ic_launcher"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" android:id="@+id/imageView_city_image"
-                    app:layout_constraintHorizontal_bias="0.498" android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_city_name" android:scaleType="fitXY"/>
-            <TextView
-                    android:text="CITY NAME"
-                    android:layout_width="0dp"
-                    android:layout_height="57dp" app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="8dp"
-                    android:id="@+id/textView_city_name"
-                    app:layout_constraintStart_toEndOf="@+id/imageButton" android:layout_marginStart="8dp"
-                    app:layout_constraintEnd_toStartOf="@+id/imageButton2" android:layout_marginEnd="8dp"
-                    android:textStyle="bold" android:textAlignment="center" android:textSize="24sp"/>
+                    app:layout_constraintHorizontal_bias="0.498"
+                    android:scaleType="fitXY" android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
             <TextView
                     android:text="TOURIST ATTRACTIONS :"
                     android:layout_width="0dp"
@@ -55,8 +30,8 @@
                     app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                     android:textAlignment="viewStart"
-                    android:textStyle="bold" android:textSize="24sp" app:layout_constraintHorizontal_bias="0.38"
-                    android:layout_marginTop="9dp" app:layout_constraintTop_toBottomOf="@+id/textView_about_city"/>
+                    android:textStyle="bold" android:textSize="24sp" app:layout_constraintHorizontal_bias="1.0"
+                    android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/recyclerView_photos_city"/>
             <TextView
                     android:text="ABOUT CITY :"
                     android:layout_width="0dp"
@@ -65,10 +40,10 @@
                     android:layout_marginStart="8dp"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView_city_image" android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toTopOf="@+id/textView_tourist_attraction"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView_city_image"
                     android:textAlignment="viewStart"
-                    android:textStyle="bold" android:textSize="28sp"/>
+                    android:textStyle="bold" android:textSize="28sp" app:layout_constraintHorizontal_bias="1.0"
+            />
             <TextView
                     android:text="OUR EXCLUSIVE PACKAGES :"
                     android:layout_width="0dp"
@@ -89,16 +64,27 @@
                     android:id="@+id/textView_city_tourist_attraction"
                     app:layout_constraintTop_toBottomOf="@+id/textView_tourist_attraction"
                     android:layout_marginTop="4dp" app:layout_constraintHorizontal_bias="0.0"/>
-            <Button
-                    android:layout_width="400dp"
-                    android:layout_height="78dp"
-                    android:id="@+id/button_package" android:layout_marginTop="8dp"
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="386dp"
+                    android:layout_height="98dp" app:layout_constraintEnd_toEndOf="@+id/textView_about_city"
+                    app:layout_constraintStart_toStartOf="@+id/textView_about_city"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_about_city" android:layout_marginEnd="8dp"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    android:id="@+id/recyclerView_photos_city"/>
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="356dp"
+                    android:layout_height="112dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintStart_toStartOf="@+id/textView_our_exclusive_packages"
+                    android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp" android:layout_marginTop="16dp"
                     app:layout_constraintTop_toBottomOf="@+id/textView_our_exclusive_packages"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                    app:layout_constraintHorizontal_bias="0.354" android:id="@+id/recyclerView_listOfPackages"
                     android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"/>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
 </LinearLayout>

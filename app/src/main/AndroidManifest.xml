@@ -16,7 +16,6 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
 
-        <activity android:name=".CityOnlyEntry"></activity>
         <activity android:name=".CItyPackageEntry">
 
         </activity>
@@ -34,7 +33,11 @@
         </activity>
         <activity android:name=".PackageDetail">
         </activity>
-        <activity android:name=".CityDetailPage">
+        <activity android:name=".CityDetailPage"
+        android:parentActivityName=".MainActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".MainActivity"/>
         </activity>
         <activity android:name=".RegisterActivity">
         </activity>
