@@ -4,9 +4,10 @@
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="50dp">
-    <Button
+    <TextView
+            android:text="TextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" android:id="@+id/button_package_name_recyclerview"/>
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent" android:id="@+id/textView_package_name"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

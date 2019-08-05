@@ -19,7 +19,6 @@ class UserPackageInformation : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_package_information)
 
-//        val extras: Bundle? = intent.extras
 
         textView_counter_adult.setText("0")
 
@@ -44,9 +43,11 @@ class UserPackageInformation : AppCompatActivity() {
 
         }
 
-//            val d_name: String? = extras!!.getString("d_name")
-//            textView_final_package_name.text = "$d_name"
-//            val d_price: String? = extras!!.getString("d_price")
+
+        val extras: Bundle? = intent.extras
+            val package_name: String? = extras!!.getString("package name")
+            textView_final_package_name.text = "$package_name"
+            val package_price: String? = extras!!.getString("package price")
 //
 
 
@@ -55,12 +56,12 @@ class UserPackageInformation : AppCompatActivity() {
 
                 val intent = Intent(this@UserPackageInformation, PackageSummary::class.java)
 
-//                intent.putExtra("d_name", d_name)
+                intent.putExtra("package name", package_name)
 
 
                 var counterValue = textView_counter_adult.text
                 intent.putExtra("counterValue", counterValue)
-//                intent.putExtra("d_price",d_price)
+                intent.putExtra("package price",package_price)
                 intent.putExtra("trip_date",tripDate)
 
                 if(flag==1){

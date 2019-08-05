@@ -85,16 +85,12 @@ class CityDetailPage : AppCompatActivity() {
                         about_city.add(city_detail.city_about)
                         t_a.add(city_detail.t_a)
                         packageName.add(city_detail.packageName)
-                        duration.add(city_detail.Duration)
+                        duration.add(city_detail.duration)
                         price.add(city_detail.price)
                         package_info.add(city_detail.package_info)
                         counter = counter + 1
 
                     }
-                }
-
-                for(value in packageName){
-                    Log.d("CityDetail",value)
                 }
 
                 for(i in 0..counter-1){
@@ -114,7 +110,7 @@ class CityDetailPage : AppCompatActivity() {
              adapter.setOnItemClickListener {item, view ->
 
                  val packageNameItem = item as PackageNameItem
-                 val intent = Intent(this@CityDetailPage,PackageDetail::class.java)
+                 val intent = Intent(view.context,PackageDetail::class.java)
                  intent.putExtra("package name",packageNameItem.name)
                  startActivity(intent)
              }
@@ -137,7 +133,7 @@ class CityDetailPage : AppCompatActivity() {
 
         override fun bind(viewHolder: ViewHolder, position: Int) {
 
-            viewHolder.itemView.button_package_name_recyclerview.text = name
+            viewHolder.itemView.textView_package_name.text = name
 
         }
 

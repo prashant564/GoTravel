@@ -23,7 +23,11 @@
         </activity>
         <activity android:name=".DestinationCity">
         </activity>
-        <activity android:name=".BookingSuccessful">
+        <activity android:name=".BookingSuccessful"
+        android:parentActivityName=".MainActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".MainActivity"/>
         </activity>
         <activity android:name=".PaymentOptions">
         </activity>
@@ -31,7 +35,12 @@
         </activity>
         <activity android:name=".UserPackageInformation">
         </activity>
-        <activity android:name=".PackageDetail">
+        <activity android:name=".PackageDetail"
+        android:parentActivityName=".MainActivity">
+
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".MainActivity"/>
         </activity>
         <activity android:name=".CityDetailPage"
         android:parentActivityName=".MainActivity">

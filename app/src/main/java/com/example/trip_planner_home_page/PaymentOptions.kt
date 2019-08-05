@@ -11,6 +11,7 @@ class PaymentOptions : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment_options)
 
+
         button_proceed.setOnClickListener { startActivity(Intent(this@PaymentOptions, BookingSuccessful::class.java)) }
     }
 }
