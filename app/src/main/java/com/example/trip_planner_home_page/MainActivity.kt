@@ -3,15 +3,16 @@ package com.example.trip_planner_home_page
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.core.view.GravityCompat
-
-import android.view.MenuItem
-
 import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.OrientationHelper
 import com.example.trip_planner_home_page.models.Cities
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -19,11 +20,13 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.current_city_row.view.*
+import kotlinx.android.synthetic.main.snapshot_images_row.view.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -31,11 +34,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportActionBar?.title = "Select current city"
+        supportActionBar?.title = "GoTravel"
 
 
 
-      fetchCities()
+        fetchCities()
 
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -52,38 +55,53 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         navView.setNavigationItemSelectedListener(this)
 
+        recyclerView_snapshot_images.layoutManager = LinearLayoutManager(this, OrientationHelper.HORIZONTAL, false)
+
 
     }
 
-    companion object{
+    companion object {
         val USER_KEY = "USER_KEY"
     }
 
-    private fun fetchCities(){
+    private fun fetchCities() {
 
         val ref = FirebaseDatabase.getInstance().getReference("/cityInformation")
-        ref.addListenerForSingleValueEvent(object: ValueEventListener{
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(p0: DataSnapshot) {
                 val adapter = GroupAdapter<ViewHolder>()
+                val adapter_images_snapshot = GroupAdapter<ViewHolder>()
                 p0.children.forEach {
                     Log.d("MainActivity", it.toString())
                     val cities = it.getValue(Cities::class.java)
-                    if(cities!=null){
+                    if (cities != null) {
                         adapter.add(CitiesItem(cities))
+                        adapter_images_snapshot.add(imagesSnapshotItem(cities.image_2))
+                        adapter_images_snapshot.add(imagesSnapshotItem(cities.image_4))
+                        adapter_images_snapshot.add(imagesSnapshotItem(cities.image_1))
                     }
 
                 }
 
-                adapter.setOnItemClickListener {item, view ->
+                adapter.setOnItemClickListener { item, view ->
 
                     val citiesItem = item as CitiesItem
-                    val intent = Intent(view.context,DestinationCity::class.java)
-                    intent.putExtra("USER_KEY",citiesItem.cities)
+                    val intent = Intent(view.context, DestinationCity::class.java)
+                    intent.putExtra("USER_KEY", citiesItem.cities)
 
                     startActivity(intent)
                 }
                 current_city_recyclerView.adapter = adapter
+                current_city_recyclerView.addItemDecoration(
+                    DividerItemDecoration(
+                        this@MainActivity,
+                        DividerItemDecoration.VERTICAL
+                    )
+                )
+                recyclerView_snapshot_images.adapter = adapter_images_snapshot
+                recyclerView_snapshot_images.addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.HORIZONTAL))
+
             }
 
             override fun onCancelled(p0: DatabaseError) {
@@ -122,7 +140,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.nav_your_profile -> {
 
-                    startActivity(Intent(this@MainActivity, Your_Profile::class.java))
+                startActivity(Intent(this@MainActivity, Your_Profile::class.java))
 
             }
 
@@ -152,20 +170,30 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-    class CitiesItem(val cities: Cities) : Item<ViewHolder>(){
+    class CitiesItem(val cities: Cities) : Item<ViewHolder>() {
 
         override fun bind(viewHolder: ViewHolder, position: Int) {
 
-
-
+            Picasso.get().load(cities.city_image_url).into(viewHolder.itemView.imageView_city_image_current_city)
             viewHolder.itemView.textView_current_city.text = cities.city_name
-//
-//        viewHolder.itemView.textView_current_city.text = cities.city_name
-//        Log.d("MainActivity",cities.city_name)
         }
 
         override fun getLayout(): Int {
             return R.layout.current_city_row
+        }
+    }
+
+    class imagesSnapshotItem(val url: String) : Item<ViewHolder>() {
+
+        override fun bind(viewHolder: ViewHolder, position: Int) {
+
+            Picasso.get().load(url).into(viewHolder.itemView.imageView_snapshot_images)
+
+        }
+
+        override fun getLayout(): Int {
+
+            return R.layout.snapshot_images_row
         }
     }
 }

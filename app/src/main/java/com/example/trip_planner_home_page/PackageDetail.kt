@@ -3,8 +3,11 @@ package com.example.trip_planner_home_page
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trip_planner_home_page.models.CityPackage
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -22,6 +25,7 @@ class PackageDetail : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_package_detail)
+        supportActionBar?.title = " "
 
         fetchPackageDetails()
 
@@ -32,6 +36,34 @@ class PackageDetail : AppCompatActivity() {
             intent.putExtra("package price",package_price)
             startActivity(intent)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        when(item?.itemId){
+
+            R.id.menu_home -> {
+
+                val intent = Intent(this, MainActivity::class.java)
+//                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+
+            }
+
+            R.id.menu_sign_out -> {
+                FirebaseAuth.getInstance().signOut()
+                val intent = Intent(this, RegisterActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.nav_menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     private fun fetchPackageDetails(){
@@ -56,8 +88,7 @@ class PackageDetail : AppCompatActivity() {
                             package_price = package_detail.price
                             textView_final_package_name.text = package_detail.packageName
                             textView_duration_value.text = package_detail.duration
-                            textView_price_value.text = package_detail.price
-                            textView_package_t_d.text = package_detail.t_a
+                            textView_price_value.setText("\u20B9 ${package_detail.price}")
                             textView_package_info.text = package_detail.package_info
                         }
 

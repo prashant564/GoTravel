@@ -15,7 +15,7 @@ class SplashScreen : AppCompatActivity() {
 
             override fun run(){
                 try {
-                       Thread.sleep(3000)
+                       Thread.sleep(2000)
                        verifyUserIsLoggedIn()
 
 //

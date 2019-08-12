@@ -10,8 +10,8 @@
 
     <application
             android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
+            android:icon="@drawable/logo"
+            android:label="GoTravel"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".CityEntry">
         </activity>
-        <activity android:name=".DestinationCity">
+        <activity android:name=".DestinationCity"
+                  android:theme="@style/AppTheme">
         </activity>
         <activity android:name=".BookingSuccessful"
         android:parentActivityName=".MainActivity">
@@ -84,7 +85,8 @@
         </activity>
         <activity
                 android:name=".SplashScreen"
-                android:label="@string/app_name"
+                android:label="GoTravel"
+                android:icon="@drawable/logo"
                 android:noHistory="true"
                 android:theme="@style/SplashTheme">
             <intent-filter>

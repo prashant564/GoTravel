@@ -34,7 +34,9 @@ class Your_Profile : AppCompatActivity() {
 
     private fun displayProfileInformation(){
 
-        val ref = FirebaseDatabase.getInstance().getReference("/users")
+        val uid = FirebaseAuth.getInstance().uid
+
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
 
         ref.addListenerForSingleValueEvent(object: ValueEventListener{
 
@@ -47,7 +49,7 @@ class Your_Profile : AppCompatActivity() {
                 p0.children.forEach{
                     val user = it.getValue(User::class.java)
 
-                    if(user?.uid == FirebaseAuth.getInstance().uid){
+                    if(user?.uid == uid){
 
                         textView_username.text = user?.username
                         textView_login_email.text = user?.user_email
