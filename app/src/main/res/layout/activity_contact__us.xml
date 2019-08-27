@@ -85,19 +85,13 @@
             android:id="@+id/textView14"
             app:layout_constraintTop_toBottomOf="@+id/textView13" app:layout_constraintStart_toStartOf="@+id/textView13"
             android:layout_marginTop="8dp" android:autoLink="web"/>
+
     <TextView
-            android:text="Hitesh Sehgal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/textView15"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView14" app:layout_constraintStart_toStartOf="@+id/textView14"
-    />
-    <TextView
-            android:text="Prashant Dixit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView16" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView15" app:layout_constraintStart_toStartOf="@+id/textView15"
-    />
+            android:layout_marginTop="8dp"
+            android:text="Prashant Dixit"
+            app:layout_constraintStart_toStartOf="@+id/textView14"
+            app:layout_constraintTop_toBottomOf="@+id/textView14" />
 </androidx.constraintlayout.widget.ConstraintLayout>

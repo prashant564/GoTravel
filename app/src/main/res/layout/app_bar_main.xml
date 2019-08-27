@@ -8,16 +8,31 @@
         tools:context=".SplashScreen">
 
     <com.google.android.material.appbar.AppBarLayout
-            android:layout_height="wrap_content"
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:theme="@style/AppTheme.AppBarOverlay">
 
-        <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+        <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/theme_2"
-                app:popupTheme="@style/AppTheme.PopupOverlay"/>
+                android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_snapshot_images"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp" />
+
+
+            <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_gravity="top"
+                    android:background="@android:color/transparent"
+                    app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+
+        </FrameLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 

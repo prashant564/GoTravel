@@ -10,5 +10,9 @@ class Contact_Us : AppCompatActivity() {
         setContentView(R.layout.activity_contact__us)
         supportActionBar?.title = "Contact Us"
     }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.from_left_in,R.anim.from_right_out)
+    }
 
 }

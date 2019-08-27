@@ -39,11 +39,14 @@ class SplashScreen : AppCompatActivity() {
             val intent = Intent(baseContext, RegisterActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
+            overridePendingTransition(R.anim.from_left_out,R.anim.from_right_in)
+
         }
         else{
             val intent = Intent(baseContext, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
+            overridePendingTransition(R.anim.from_left_out,R.anim.from_right_in)
         }
 
     }

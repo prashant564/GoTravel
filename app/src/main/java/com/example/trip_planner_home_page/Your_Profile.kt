@@ -30,6 +30,10 @@ class Your_Profile : AppCompatActivity() {
     }
 
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.from_left_in,R.anim.from_right_out)
+    }
 
 
     private fun displayProfileInformation(){

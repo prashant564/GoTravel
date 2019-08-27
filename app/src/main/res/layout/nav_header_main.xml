@@ -11,7 +11,8 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         android:orientation="vertical"
-        android:gravity="bottom">
+        android:gravity="bottom"
+        android:backgroundTint="@color/navbar">
 
     <ImageView
             android:layout_width="123dp"
@@ -25,9 +26,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
-            android:text="Trip Planner"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" android:textSize="18sp"
-            android:textColor="#FFEB3B"/>
+            android:text="GoTravel"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/theme_1"
+            android:textSize="18sp" />
 
     <TextView
             android:layout_width="wrap_content"

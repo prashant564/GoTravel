@@ -54,6 +54,7 @@ class CityDetailPage : AppCompatActivity() {
         val destCityItem: Cities = intent.getParcelableExtra(DestinationCity.DEST_USER_KEY)
         supportActionBar?.title = destCityItem.city_name
 
+
         fetchDestinationCityDetails()
 
         recyclerView_photos_city.layoutManager = LinearLayoutManager(this,OrientationHelper.HORIZONTAL,false)
@@ -76,6 +77,7 @@ class CityDetailPage : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
 //                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
+                overridePendingTransition(R.anim.from_left_in,R.anim.from_right_out)
 
             }
 
@@ -84,6 +86,7 @@ class CityDetailPage : AppCompatActivity() {
                 val intent = Intent(this, RegisterActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
+                overridePendingTransition(R.anim.from_left_in,R.anim.from_right_out)
             }
         }
 
@@ -93,6 +96,11 @@ class CityDetailPage : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.nav_menu, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.from_left_in,R.anim.from_right_out)
     }
 
     private fun fetchDestinationCityDetails(){
@@ -157,6 +165,7 @@ class CityDetailPage : AppCompatActivity() {
                  val intent = Intent(view.context,PackageDetail::class.java)
                  intent.putExtra("package name",packageNameItem.name)
                  startActivity(intent)
+                 overridePendingTransition(R.anim.from_left_out,R.anim.from_right_in)
              }
 
                 recyclerView_listOfPackages.adapter = adapter

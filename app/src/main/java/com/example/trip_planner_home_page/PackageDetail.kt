@@ -35,6 +35,7 @@ class PackageDetail : AppCompatActivity() {
             intent.putExtra("package name",package_name)
             intent.putExtra("package price",package_price)
             startActivity(intent)
+            overridePendingTransition(R.anim.from_left_out,R.anim.from_right_in)
         }
     }
 
@@ -47,6 +48,7 @@ class PackageDetail : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
 //                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
+                overridePendingTransition(R.anim.from_left_in,R.anim.from_right_out)
 
             }
 
@@ -55,6 +57,7 @@ class PackageDetail : AppCompatActivity() {
                 val intent = Intent(this, RegisterActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
+                overridePendingTransition(R.anim.from_left_in,R.anim.from_right_out)
             }
         }
 
@@ -65,6 +68,12 @@ class PackageDetail : AppCompatActivity() {
         menuInflater.inflate(R.menu.nav_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.from_left_in,R.anim.from_right_out)
+    }
+
 
     private fun fetchPackageDetails(){
         val ref = FirebaseDatabase.getInstance().getReference("/CityPackage")

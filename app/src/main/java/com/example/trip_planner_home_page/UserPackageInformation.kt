@@ -69,6 +69,7 @@ class UserPackageInformation : AppCompatActivity() {
 
                 if(flag==1){
                     startActivity(intent)
+                    overridePendingTransition(R.anim.from_left_out,R.anim.from_right_in)
                 }
                 else
                 {
@@ -81,6 +82,14 @@ class UserPackageInformation : AppCompatActivity() {
 
             }
 
+
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.from_left_in,R.anim.from_right_out)
+    }
+
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
         when(item?.itemId){
@@ -90,6 +99,7 @@ class UserPackageInformation : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
 //                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
+                overridePendingTransition(R.anim.from_left_in,R.anim.from_right_out)
 
             }
 
@@ -98,6 +108,7 @@ class UserPackageInformation : AppCompatActivity() {
                 val intent = Intent(this, RegisterActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
+                overridePendingTransition(R.anim.from_left_in,R.anim.from_right_out)
             }
         }
 

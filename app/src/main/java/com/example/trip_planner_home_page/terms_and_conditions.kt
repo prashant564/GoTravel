@@ -10,4 +10,11 @@ class terms_and_conditions : AppCompatActivity() {
         setContentView(R.layout.activity_terms_and_conditions)
         supportActionBar?.title = "Terms and Conditions"
     }
+
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.from_left_in,R.anim.from_right_out)
+    }
+
 }

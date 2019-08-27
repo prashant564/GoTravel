@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.ProgressBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -27,6 +29,7 @@ import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.current_city_row.view.*
 import kotlinx.android.synthetic.main.snapshot_images_row.view.*
@@ -41,13 +44,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         supportActionBar?.title = "GoTravel"
 
-
-
-        fetchCities()
-
-
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        fetchCities()
 
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
@@ -99,6 +99,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     intent.putExtra("USER_KEY", citiesItem.cities)
 
                     startActivity(intent)
+                    overridePendingTransition(R.anim.from_left_out,R.anim.from_right_in)
+
                 }
                 current_city_recyclerView.adapter = adapter
                 current_city_recyclerView.addItemDecoration(
@@ -149,11 +151,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_your_profile -> {
 
                 startActivity(Intent(this@MainActivity, Your_Profile::class.java))
+                overridePendingTransition(R.anim.from_left_out,R.anim.from_right_in)
 
             }
 
             R.id.nav_contact_us -> {
                 startActivity(Intent(this@MainActivity, Contact_Us::class.java))
+                overridePendingTransition(R.anim.from_left_out,R.anim.from_right_in)
 
             }
             R.id.nav_logout -> {
@@ -161,14 +165,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val intent = Intent(this, RegisterActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
+                overridePendingTransition(R.anim.from_left_out,R.anim.from_right_in)
 
             }
             R.id.nav_t_and_c -> {
                 startActivity(Intent(this@MainActivity, terms_and_conditions::class.java))
+                overridePendingTransition(R.anim.from_left_out,R.anim.from_right_in)
 
             }
             R.id.nav_rate_us -> {
                 startActivity(Intent(this@MainActivity, RateUs::class.java))
+                overridePendingTransition(R.anim.from_left_out,R.anim.from_right_in)
 
 
             }
@@ -182,7 +189,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         override fun bind(viewHolder: ViewHolder, position: Int) {
 
-            Picasso.get().load(cities.city_image_url).into(viewHolder.itemView.imageView_city_image_current_city)
+            Picasso.get().load(cities.city_image_url).into(viewHolder.itemView.imageView_city_image_current_city,object: Callback{
+
+                override fun onSuccess() {
+
+                   viewHolder.itemView.progressbar_current_city.visibility = View.GONE
+
+                }
+
+                override fun onError(e: Exception?) {
+
+                }
+
+            })
             viewHolder.itemView.textView_current_city.text = cities.city_name
 
             //saving images offline
@@ -191,6 +210,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 into(viewHolder.itemView.imageView_city_image_current_city, object: Callback{
                     override fun onSuccess() {
 
+                        viewHolder.itemView.progressbar_current_city.visibility = View.GONE
                     }
 
                     override fun onError(e: Exception?) {
@@ -211,7 +231,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         override fun bind(viewHolder: ViewHolder, position: Int) {
 
-            Picasso.get().load(url).into(viewHolder.itemView.imageView_snapshot_images)
+            Picasso.get().load(url).into(viewHolder.itemView.imageView_snapshot_images, object: Callback{
+
+                override fun onSuccess() {
+
+                }
+
+                override fun onError(e: Exception?) {
+
+                }
+            })
 
 
             //saving images offline
@@ -219,6 +248,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Picasso.get().load(url).networkPolicy(NetworkPolicy.OFFLINE).
                 into(viewHolder.itemView.imageView_snapshot_images, object: Callback{
                     override fun onSuccess() {
+
+//
 
                     }
 

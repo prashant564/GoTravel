@@ -7,6 +7,7 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
@@ -62,6 +63,7 @@ class DestinationCity : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
 //                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
+                overridePendingTransition(R.anim.from_left_in,R.anim.from_right_out)
 
             }
 
@@ -70,6 +72,7 @@ class DestinationCity : AppCompatActivity() {
                 val intent = Intent(this, RegisterActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
+                overridePendingTransition(R.anim.from_left_in,R.anim.from_right_out)
             }
         }
 
@@ -80,6 +83,13 @@ class DestinationCity : AppCompatActivity() {
         menuInflater.inflate(R.menu.nav_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.from_left_in,R.anim.from_right_out)
+    }
+
 
     private fun fetchDestinationCity(){
         val ref = FirebaseDatabase.getInstance().getReference("/cityInformation")
@@ -120,6 +130,7 @@ class DestinationCity : AppCompatActivity() {
 
 
                     startActivity(intent)
+                    overridePendingTransition(R.anim.from_left_out,R.anim.from_right_in)
 
                     finish()
 
@@ -140,8 +151,37 @@ class DestinationCity : AppCompatActivity() {
 
         override fun bind(viewHolder: ViewHolder, position: Int) {
 
-            Picasso.get().load(cities.city_image_url).into(viewHolder.itemView.imageView_city_image_dest_city)
+            Picasso.get().load(cities.city_image_url).into(viewHolder.itemView.imageView_city_image_dest_city, object: Callback{
+
+                override fun onSuccess() {
+
+                    viewHolder.itemView.progressbar_destination_city.visibility  = View.GONE
+                }
+
+                override fun onError(e: Exception?) {
+
+                }
+
+            })
+
             viewHolder.itemView.textView_dest_city.text = cities.city_name
+
+
+            //saving images offline
+
+            Picasso.get().load(cities.city_image_url).networkPolicy(NetworkPolicy.OFFLINE).
+                into(viewHolder.itemView.imageView_city_image_dest_city, object: Callback{
+                    override fun onSuccess() {
+
+                        viewHolder.itemView.progressbar_destination_city.visibility = View.GONE
+                    }
+
+                    override fun onError(e: Exception?) {
+                        Picasso.get().load(cities.city_image_url).into(viewHolder.itemView.imageView_city_image_dest_city)
+                    }
+                })
+
+
 
         }
 

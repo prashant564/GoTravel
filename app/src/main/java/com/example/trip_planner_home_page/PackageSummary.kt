@@ -48,8 +48,20 @@ class PackageSummary : AppCompatActivity() {
 
 
 
-        textView_pay_now.setOnClickListener { startActivity(Intent(this@PackageSummary, PaymentOptions::class.java)) }
+        textView_pay_now.setOnClickListener {
+
+            startActivity(Intent(this@PackageSummary, PaymentOptions::class.java))
+            overridePendingTransition(R.anim.from_left_out,R.anim.from_right_in)
+        }
     }
+
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.from_left_in,R.anim.from_right_out)
+    }
+
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
         when(item?.itemId){
@@ -59,6 +71,7 @@ class PackageSummary : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
 //                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
+                overridePendingTransition(R.anim.from_left_in,R.anim.from_right_out)
 
             }
 
@@ -67,6 +80,7 @@ class PackageSummary : AppCompatActivity() {
                 val intent = Intent(this, RegisterActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
+                overridePendingTransition(R.anim.from_left_in,R.anim.from_right_out)
             }
         }
 

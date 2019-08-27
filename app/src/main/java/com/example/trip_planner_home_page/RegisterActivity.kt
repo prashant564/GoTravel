@@ -31,6 +31,7 @@ class RegisterActivity : AppCompatActivity() {
 
         button_register_login.setOnClickListener {
             startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+            overridePendingTransition(R.anim.from_left_out,R.anim.from_right_in)
         }
 
 
@@ -74,6 +75,13 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.from_left_in,R.anim.from_right_out)
+    }
+
+
     private fun checkUser() {
         if (editText_username.toString().isEmpty()) {
             editText_username.error = "Please enter username"
@@ -103,6 +111,7 @@ class RegisterActivity : AppCompatActivity() {
                     Log.d(TAG, "createUserWithEmail:success")
                     uploadImagetoFirebaseStorage()
                     startActivity(Intent(this@RegisterActivity,LoginActivity::class.java))
+                    overridePendingTransition(R.anim.from_left_out,R.anim.from_right_in)
 
 
                 } else {

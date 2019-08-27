@@ -27,6 +27,7 @@ class LoginActivity : AppCompatActivity() {
 
         textView_create_account.setOnClickListener {
             startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
+            overridePendingTransition(R.anim.from_left_out,R.anim.from_right_in)
         }
 
         auth = FirebaseAuth.getInstance()
@@ -37,6 +38,13 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.from_left_in,R.anim.from_right_out)
+    }
+
+
 //    public override fun onStart() {
 //        super.onStart()
 //        // Check if user is signed in (non-null) and update UI accordingly.
@@ -94,6 +102,7 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
+            overridePendingTransition(R.anim.from_left_out,R.anim.from_right_in)
         }
     }
 
