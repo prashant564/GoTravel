@@ -1,5 +1,6 @@
 package com.example.trip_planner_home_page
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +21,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Callback
+import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
@@ -27,9 +30,11 @@ import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.current_city_row.view.*
 import kotlinx.android.synthetic.main.snapshot_images_row.view.*
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -67,6 +72,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun fetchCities() {
 
         val ref = FirebaseDatabase.getInstance().getReference("/cityInformation")
+
+        ref.keepSynced(true)
+
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(p0: DataSnapshot) {
@@ -176,6 +184,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             Picasso.get().load(cities.city_image_url).into(viewHolder.itemView.imageView_city_image_current_city)
             viewHolder.itemView.textView_current_city.text = cities.city_name
+
+            //saving images offline
+
+            Picasso.get().load(cities.city_image_url).networkPolicy(NetworkPolicy.OFFLINE).
+                into(viewHolder.itemView.imageView_city_image_current_city, object: Callback{
+                    override fun onSuccess() {
+
+                    }
+
+                    override fun onError(e: Exception?) {
+                        Picasso.get().load(cities.city_image_url).into(viewHolder.itemView.imageView_city_image_current_city)
+                    }
+                })
+
+
+
         }
 
         override fun getLayout(): Int {
@@ -188,6 +212,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         override fun bind(viewHolder: ViewHolder, position: Int) {
 
             Picasso.get().load(url).into(viewHolder.itemView.imageView_snapshot_images)
+
+
+            //saving images offline
+
+            Picasso.get().load(url).networkPolicy(NetworkPolicy.OFFLINE).
+                into(viewHolder.itemView.imageView_snapshot_images, object: Callback{
+                    override fun onSuccess() {
+
+                    }
+
+                    override fun onError(e: Exception?) {
+                        Picasso.get().load(url).into(viewHolder.itemView.imageView_snapshot_images)
+                    }
+                })
 
         }
 

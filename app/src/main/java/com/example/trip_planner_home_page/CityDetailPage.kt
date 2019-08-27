@@ -1,5 +1,6 @@
 package com.example.trip_planner_home_page
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageItemInfo
 
@@ -18,6 +19,8 @@ import com.example.trip_planner_home_page.models.Cities
 import com.example.trip_planner_home_page.models.CityPackage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.squareup.picasso.Callback
+import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
@@ -26,6 +29,7 @@ import kotlinx.android.synthetic.main.activity_city_detail_page.*
 import kotlinx.android.synthetic.main.activity_destination_city.*
 import kotlinx.android.synthetic.main.city_photos_row.view.*
 import kotlinx.android.synthetic.main.pacakge_info_row.view.*
+import java.lang.Exception
 
 class CityDetailPage : AppCompatActivity() {
 
@@ -43,6 +47,7 @@ class CityDetailPage : AppCompatActivity() {
 
 
 
+    @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_city_detail_page)
@@ -93,6 +98,8 @@ class CityDetailPage : AppCompatActivity() {
     private fun fetchDestinationCityDetails(){
 
         val ref = FirebaseDatabase.getInstance().getReference("/CityPackage")
+
+        ref.keepSynced(true)
 
         ref.addValueEventListener(object: ValueEventListener{
 
@@ -187,6 +194,22 @@ class CityDetailPage : AppCompatActivity() {
         override fun bind(viewHolder: ViewHolder, position: Int) {
 
         Picasso.get().load(url).into(viewHolder.itemView.imageView_city_detail_images)
+
+
+            //saving images offline
+
+            Picasso.get().load(url).networkPolicy(NetworkPolicy.OFFLINE).
+                into(viewHolder.itemView.imageView_city_detail_images, object: Callback {
+                    override fun onSuccess() {
+
+                    }
+
+                    override fun onError(e: Exception?) {
+                        Picasso.get().load(url).into(viewHolder.itemView.imageView_city_detail_images)
+                    }
+                })
+
+
         }
 
         override fun getLayout(): Int {

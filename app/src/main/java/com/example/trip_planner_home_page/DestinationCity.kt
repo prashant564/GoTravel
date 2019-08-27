@@ -1,5 +1,6 @@
 package com.example.trip_planner_home_page
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.AsyncTask
 
@@ -19,6 +20,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Callback
+import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
@@ -27,12 +30,14 @@ import kotlinx.android.synthetic.main.activity_destination_city.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.destination_city_row.view.*
 import kotlinx.android.synthetic.main.destination_snapshot_images.view.*
+import java.lang.Exception
 import java.util.ArrayList
 
 class DestinationCity : AppCompatActivity() {
 
 
 
+    @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_destination_city)
@@ -150,6 +155,20 @@ class DestinationCity : AppCompatActivity() {
         override fun bind(viewHolder: ViewHolder, position: Int) {
 
             Picasso.get().load(url).into(viewHolder.itemView.imageView_dest_snapshot_images)
+
+
+            //saving images offline
+
+            Picasso.get().load(url).networkPolicy(NetworkPolicy.OFFLINE).
+                into(viewHolder.itemView.imageView_dest_snapshot_images, object: Callback {
+                    override fun onSuccess() {
+
+                    }
+
+                    override fun onError(e: Exception?) {
+                        Picasso.get().load(url).into(viewHolder.itemView.imageView_dest_snapshot_images)
+                    }
+                })
 
         }
 
